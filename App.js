@@ -5,16 +5,47 @@ import {
   View,
   KeyboardAvoidingView,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  FlatList
 } from 'react-native';
 
+
 class Dashboard extends PureComponent {
+  renderCardItem = ({item}) => {
+    const title = 'Deck 1'
+    const cards = []
+
+    return (
+      <View key={item.key} style={{backgroundColor: 'red'}}>
+        <Text>{title}</Text>
+        <Text>{cards.length} cards</Text>
+      </View>
+    )
+  } 
+
   render() {
     
     // FlatList
     return (
-      <View>
-        <Text>Welcome to the dashboard</Text>
+      <View
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <Text>
+          Welcome to the dashboard
+        </Text>
+
+        <View
+          style={{display: 'flex', flex: 0, marginTop: 20, backgroundColor: 'blue'}}
+        >
+          <FlatList
+            data={[{key: 'a'}, {key: 'b'}]}
+            renderItem={this.renderCardItem}
+          />
+        </View>
       </View>
     )
   }
@@ -130,26 +161,83 @@ class CreateCard extends PureComponent {
 }
 
 class DeckDetails extends PureComponent {
+  _handleAddCard = () => {
+    // TODO: Implement
+    alert('Add card...')
+  }
+
+  _handleStartQuiz = () => {
+    // TODO: Implement
+    alert('Start quiz...')
+  }
+
+  _handleDeleteDeck = () => {
+    // TODO: Implement
+    alert('Delete deck...')
+  }
+
   render() {
-    
+    const title = 'Deck 1'
+    const cards = [
+      {
+        question: 'Bla bla bla',
+        answer: 'blue blue blue',
+      }
+    ]
+    const buttonStyle = {
+      fontSize: 30,
+      padding: 30,
+      borderRadius: 20,
+      border: '1px solid #000',
+      backgroundColor: '#f0f0f0',
+      marginBottom: 20,
+    }
+
+    const buttonDeleteStyle = {
+      ...buttonStyle,
+      ...{
+        color: 'red',
+        backgroundColor: '#fff'
+      }
+    }
 
     return (
-      <View>
-        <Text>Welcome to the dashboard</Text>
+      <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+        <Text style={{fontSize: 30}}>{title}</Text>
+        <Text>{cards.length} cards</Text>
+
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={this._handleAddCard}
+        >
+          <Text>Add Card</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={buttonStyle}
+          onPress={this._handleStartQuiz}
+        >
+          <Text>Start Quiz</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={buttonDeleteStyle}
+          onPress={this._handleDeleteDeck}
+        >
+          <Text style={{color: 'red'}}>
+            Delete Deck
+          </Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
-
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-
-        <CreateCard />
-        <CreateDeck />
+        <Dashboard />
       </View>
     );
   }
