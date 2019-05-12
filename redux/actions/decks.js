@@ -7,9 +7,11 @@ const addDeckAction = (title) => ({
     }
 })
 
-export const addDeck = ({title}) => (dispatch) => (
-    dispatch(addDeckAction(title))
-)
+export const addDeck = ({title}) => (dispatch) => {
+    console.log('Dispatching addDeck action...')
+
+    return dispatch(addDeckAction(title))
+}
 
 export const addCard = (card) => (dispatch) => {
 

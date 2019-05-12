@@ -5,9 +5,9 @@ import {addDeck} from '../actions/decks'
 
 const mapStateToProps = undefined
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = {
     addDeck
-})
+}
 
 export default connect(
     mapStateToProps,

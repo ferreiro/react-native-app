@@ -39,14 +39,16 @@ const styles = StyleSheet.create({
   }
 })
 
+const initialState = {
+  title: ''
+}
+
 export class CreateDeck extends PureComponent {
     static navigationOptions = {
       title: 'Create deck'
     }
 
-    state = {
-      title: '',
-    }
+    state = initialState
   
     _handleChangeTitle = (title) => {
       this.setState({title})
@@ -54,13 +56,14 @@ export class CreateDeck extends PureComponent {
   
     _handleSubmitForm = () => {
       const {title} = this.state
+      const {addDeck, navigation} = this.props
 
-      console.log('pressed!')
-      window.alert('button pressed!!!')
+      // Persist the new deck
+      addDeck({title})
+      this.setState(initialState)
 
-      this.props.addDeck({
-        title
-      })
+      // Change the screen to home.
+      navigation.navigate('Home')
     }
   
     render() {
@@ -74,7 +77,6 @@ export class CreateDeck extends PureComponent {
           style={styles.container}
           behavior="padding"
         >
-          <Text>{JSON.stringify(this.props)}</Text>
           <Text
             style={styles.title}
           >
