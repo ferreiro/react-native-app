@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {
+  Button,
   StyleSheet,
   Text,
   View,
@@ -9,6 +10,10 @@ import {
 } from 'react-native';
 
 export class CreateDeck extends PureComponent {
+    static navigationOptions = {
+      title: 'Create deck'
+    }
+
     state = {
       title: '',
     }
@@ -26,6 +31,9 @@ export class CreateDeck extends PureComponent {
   
     render() {
       const {title} = this.state;
+      const {navigation} = this.props;
+      const id = navigation.getParam('id', 'default');
+      const name = navigation.getParam('name', 'default');
   
       return (
         <KeyboardAvoidingView
@@ -37,7 +45,22 @@ export class CreateDeck extends PureComponent {
           >
             What's the title of your new deck?
           </Text>
+          
+          <Text>
+            {id}
+            {name}
+          </Text>
   
+          <Button
+            title="Go to Details"
+            onPress={() => this.props.navigation.push('CreateDeck')}
+          />
+
+          <Button
+            title="Go back"
+            onPress={() => this.props.navigation.goBack()}
+          />
+
           <TextInput
             style={{padding: 30, alignSelf: 'stretch', borderColor: 'gray', borderWidth: 1, marginBottom: 30}}
             value={title}
@@ -49,7 +72,7 @@ export class CreateDeck extends PureComponent {
             onPress={this._handleSubmitForm}
             style={{maxWidth: 250, backgroundColor: '#000', padding: 20}}
           >
-            <Text style={{color: '#fff', fontSize: '20px'}}>
+            <Text style={{color: '#fff', fontSize: 20}}>
               Create Deck
             </Text>
           </TouchableOpacity>

@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {
+  Button,
   StyleSheet,
   Text,
   View,
@@ -9,6 +10,13 @@ import {
 } from 'react-native';
 
 export class DeckDetails extends PureComponent {
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      title: navigation.getParam('id', 'Deck details'),
+    }
+  }
+
   _handleAddCard = () => {
     // TODO: Implement
     alert('Add card...')
