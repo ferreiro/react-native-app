@@ -77,7 +77,7 @@ const AppContainer = createAppContainer(AppNavigator)
 export default class App extends PureComponent {
   render() {
     return (
-      <AppContainer />
+      <AppContainer style={styles.container} />
     )
   }
 }

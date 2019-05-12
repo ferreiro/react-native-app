@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types'
 import {
   Button,
   StyleSheet,
@@ -17,9 +18,14 @@ export class DeckDetails extends PureComponent {
     }
   }
 
+  static propTypes ={
+    deck: PropTypes.object,
+  }
+
   _handleAddCard = () => {
-    // TODO: Implement
-    alert('Add card...')
+    this.props.navigation.navigate('CreateCard', {
+      deckId: this.props.deck.id
+    })
   }
 
   _handleStartQuiz = () => {

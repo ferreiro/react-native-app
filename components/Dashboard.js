@@ -10,6 +10,36 @@ import {
   FlatList
 } from 'react-native';
 
+const DECKS = [
+    {
+        id: 'mySuperDeck',
+        title: '1: My super title',
+        items: [
+            {
+                question: '1: What is your name?',
+                answer: 'This is the answer',
+            }
+        ],
+    },
+    {
+        id: 'mySuperDeck2',
+        title: '2: My super title',
+        items: [
+            {
+                id: '232323',
+                question: '1: What is your name?',
+                answer: 'This is the answer',
+            },
+            {
+                id: '232323244',
+                question: '1: What is your name?',
+                answer: 'This is the answer',
+            }
+        ],
+    },
+]
+
+
 const styles = StyleSheet.create({
     container: {},
     item: {
@@ -73,35 +103,6 @@ export class Dashboard extends PureComponent {
     } 
   
     render() {
-        const decks = [
-            {
-                id: 'mySuperDeck',
-                title: '1: My super title',
-                items: [
-                    {
-                        question: '1: What is your name?',
-                        answer: 'This is the answer',
-                    }
-                ],
-            },
-            {
-                id: 'mySuperDeck2',
-                title: '2: My super title',
-                items: [
-                    {
-                        id: '232323',
-                        question: '1: What is your name?',
-                        answer: 'This is the answer',
-                    },
-                    {
-                        id: '232323244',
-                        question: '1: What is your name?',
-                        answer: 'This is the answer',
-                    }
-                ],
-            },
-        ]
-      
       // FlatList
       return (
         <View
@@ -110,7 +111,7 @@ export class Dashboard extends PureComponent {
           }}
         >
             <FlatList
-                data={decks}
+                data={DECKS}
                 renderItem={this.renderCardItem}
             />
         </View>
