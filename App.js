@@ -8,21 +8,25 @@ import {
   TextInput,
   FlatList
 } from 'react-native';
+import {createAppContainer, createStackNavigator} from 'react-navigation';
 
 import {Dashboard} from './components/Dashboard';
 import {DeckDetails} from './components/DeckDetails';
 import {CreateCard} from './components/CreateCard';
 import {CreateDeck} from './components/CreateDeck';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Dashboard />
-      </View>
-    );
+const router = {
+  Home: {
+    screen: Dashboard
+  },
+  CreateDeck: {
+    screen: CreateDeck
   }
 }
+const options = {};
+const AppNavigator = createStackNavigator(router, options)
+
+export default createAppContainer(AppNavigator)
 
 const styles = StyleSheet.create({
   container: {
