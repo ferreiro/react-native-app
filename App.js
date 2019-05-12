@@ -8,6 +8,15 @@ import rootReducer from './redux/reducers/index'
 
 const store = createStore(rootReducer)
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})
+
 export default class App extends PureComponent {
   render() {
 
@@ -18,12 +27,3 @@ export default class App extends PureComponent {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

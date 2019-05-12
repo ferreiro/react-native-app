@@ -1,7 +1,17 @@
+export const ADD_DECK = 'decks/ADD_DECK'
 
+const addDeckAction = (title) => ({
+    type: ADD_DECK,
+    payload: {
+        title
+    }
+})
 
+export const addDeck = ({title}) => (dispatch) => (
+    dispatch(addDeckAction(title))
+)
 
-export const addDeck = (deck) => (dispatch) => {
+export const addCard = (card) => (dispatch) => {
 
 }
 

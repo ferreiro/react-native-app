@@ -53,10 +53,14 @@ export class CreateDeck extends PureComponent {
     }
   
     _handleSubmitForm = () => {
-      // TODO: Implement method to persist the new desk into
-      // the store
+      const {title} = this.state
+
       console.log('pressed!')
       window.alert('button pressed!!!')
+
+      this.props.addDeck({
+        title
+      })
     }
   
     render() {
@@ -70,6 +74,7 @@ export class CreateDeck extends PureComponent {
           style={styles.container}
           behavior="padding"
         >
+          <Text>{JSON.stringify(this.props)}</Text>
           <Text
             style={styles.title}
           >

@@ -9,8 +9,8 @@ import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom
 import {MaterialIcons} from '@expo/vector-icons'
 
 import ConnectedDashboard from './redux/containers/ConnectedDashboard';
+import ConnectedCreateDeck from './redux/containers/ConnectedCreateDeck';
 import {DeckDetails} from './components/DeckDetails';
-import {CreateCard} from './components/CreateCard';
 import {CreateDeck} from './components/CreateDeck';
 
 const DashboardStack = createStackNavigator({
@@ -22,7 +22,7 @@ const DashboardStack = createStackNavigator({
     screen: DeckDetails
   },
   CreateCard: {
-    screen: CreateCard
+    screen: ConnectedCreateDeck
   }
 }, {
   initialRouteName: "Home",
@@ -36,7 +36,7 @@ const DashboardStack = createStackNavigator({
 
 const CreateDeckStack = createStackNavigator({
   CreateDeck: {
-    screen: CreateDeck
+    screen: ConnectedCreateDeck
   }
 }, {
   initialRouteName: "CreateDeck",

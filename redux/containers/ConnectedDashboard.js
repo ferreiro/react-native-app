@@ -1,6 +1,7 @@
-import React from 'react'
-import {Dashboard} from '../../components/Dashboard'
 import {connect} from 'react-redux'
+
+import {Dashboard} from '../../components/Dashboard'
+import {addDeck} from '../actions/decks'
 
 const mapStateToProps = (state) => ({
     decks: state.decks
