@@ -1,44 +1,14 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types'
+import {isEmpty} from 'lodash'
 import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  TextInput,
-  FlatList
+    Button,
+    FlatList,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
-
-const DECKS = [
-    {
-        id: 'mySuperDeck',
-        title: '1: My super title',
-        items: [
-            {
-                question: '1: What is your name?',
-                answer: 'This is the answer',
-            }
-        ],
-    },
-    {
-        id: 'mySuperDeck2',
-        title: '2: My super title',
-        items: [
-            {
-                id: '232323',
-                question: '1: What is your name?',
-                answer: 'This is the answer',
-            },
-            {
-                id: '232323244',
-                question: '1: What is your name?',
-                answer: 'This is the answer',
-            }
-        ],
-    },
-]
-
 
 const styles = StyleSheet.create({
     container: {},
@@ -75,12 +45,24 @@ export class Dashboard extends PureComponent {
         title: 'Dashboard'
     }
 
+    static propTypes = {
+        decks: PropTypes.arrayOf(PropTypes.object),
+    }
+
+    static defaultProps = {
+        decks: []
+    }
+
     openCard = (id, event) => {
         console.log('event', event)
         console.log(this.props)
         this.props.navigation.navigate('DeckDetails', {
             id,
         })
+    }
+
+    openCreateDeck = () => {
+        this.props.navigation.navigate('CreateDeck')
     }
 
     renderCardItem = ({item: deck}) => {
@@ -100,22 +82,42 @@ export class Dashboard extends PureComponent {
                 </Text>
             </TouchableOpacity>
         )
-    } 
+    }
   
     render() {
-      // FlatList
-      return (
-        <View
-          style={{
-            padding: 20,
-          }}
-        >
-            <FlatList
-                data={DECKS}
-                renderItem={this.renderCardItem}
-            />
-        </View>
-      )
+        const {decks} = this.props;
+        
+        return (
+            <View
+                style={{
+                    padding: 20,
+                }}
+            >
+                {isEmpty(decks) ? (
+                    <View>
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                textAlign: 'center',
+                                marginTop: 20,
+                                marginBottom: 20,
+                            }}
+                        >
+                            You have not created any decks yet.
+                        </Text>
+                        <Button
+                            title="Create your first deck"
+                            onPress={this.openCreateDeck}
+                        />
+                    </View>
+                ) : (
+                    <FlatList
+                        data={decks}
+                        renderItem={this.renderCardItem}
+                    />
+                )}
+            </View>
+        )
     }
   }
   
