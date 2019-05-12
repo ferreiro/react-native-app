@@ -41,15 +41,16 @@ export const decks = (state = initialState, action) => {
         const newDeck = {
             title: payload.title,
             id: timestamp.utc('YYYYMMDDmmssms'),
-            items: [],
+            cards: [],
         }
+
+        const updatedState =  merge({}, state, {[newDeck.id]: newDeck})
 
         console.log('ADD_DECK', ADD_DECK)
+        console.log('updatedState')
+        console.log(updatedState)
 
-        return {
-            ...state,
-            ...{[newDeck.id]: newDeck}
-        }
+        return updatedState
     }
     
     return state

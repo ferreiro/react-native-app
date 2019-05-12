@@ -46,11 +46,11 @@ export class Dashboard extends PureComponent {
     }
 
     static propTypes = {
-        decks: PropTypes.arrayOf(PropTypes.object),
+        decks: PropTypes.object,
     }
 
     static defaultProps = {
-        decks: []
+        decks: {}
     }
 
     openDeck = (deck, event) => {
@@ -90,7 +90,11 @@ export class Dashboard extends PureComponent {
   
     render() {
         const {decks} = this.props
+
+        console.log('decks')
+        console.log(decks)
         const decksData = Object.values(decks)
+        console.log(decksData)
         
         return (
             <View

@@ -63,6 +63,7 @@ export class CreateDeck extends PureComponent {
       this.setState(initialState)
 
       // Change the screen to home.
+      navigation.dismiss()
       navigation.navigate('Home')
     }
   

@@ -11,7 +11,7 @@ import {MaterialIcons} from '@expo/vector-icons'
 import ConnectedDashboard from './redux/containers/ConnectedDashboard';
 import ConnectedCreateDeck from './redux/containers/ConnectedCreateDeck';
 import ConnectedDeckDetails from './redux/containers/ConnectedDeckDetails';
-import {CreateDeck} from './components/CreateDeck';
+import ConnectedCreateCard from './redux/containers/ConnectedCreateCard';
 
 const DashboardStack = createStackNavigator({
   Home: {
@@ -22,7 +22,7 @@ const DashboardStack = createStackNavigator({
     screen: ConnectedDeckDetails
   },
   CreateCard: {
-    screen: ConnectedCreateDeck
+    screen: ConnectedCreateCard
   }
 }, {
   initialRouteName: "Home",
