@@ -53,11 +53,14 @@ export class Dashboard extends PureComponent {
         decks: []
     }
 
-    openCard = (id, event) => {
+    openDeck = (deck, event) => {
+        const {id, title} = deck;
+
         console.log('event', event)
         console.log(this.props)
         this.props.navigation.navigate('DeckDetails', {
             id,
+            title
         })
     }
 
@@ -66,26 +69,28 @@ export class Dashboard extends PureComponent {
     }
 
     renderCardItem = ({item: deck}) => {
-        const {id, title, items} = deck;
+        const {id, title, cards} = deck;
 
         return (
             <TouchableOpacity
+                key={id}
                 style={styles.item}
-                onPress={(event) => this.openCard(id, event)}
+                onPress={(event) => this.openDeck(deck, event)}
                 title="my link"
             >
                 <Text style={styles.title}>
                     {title}
                 </Text>
                 <Text style={styles.cards}>
-                    {items.length} cards
+                    {cards.length} cards
                 </Text>
             </TouchableOpacity>
         )
     }
   
     render() {
-        const {decks} = this.props;
+        const {decks} = this.props
+        const decksData = Object.values(decks)
         
         return (
             <View
@@ -112,7 +117,7 @@ export class Dashboard extends PureComponent {
                     </View>
                 ) : (
                     <FlatList
-                        data={decks}
+                        data={decksData}
                         renderItem={this.renderCardItem}
                     />
                 )}

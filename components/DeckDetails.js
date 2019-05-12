@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types'
+import {isEmpty} from 'lodash'
 import {
   Button,
   StyleSheet,
@@ -12,14 +13,30 @@ import {
 
 export class DeckDetails extends PureComponent {
   static navigationOptions = ({ navigation }) => {
+    const title = navigation.getParam('title');
 
     return {
-      title: navigation.getParam('id', 'Deck details'),
+      title: title,
     }
   }
 
   static propTypes ={
     deck: PropTypes.object,
+  }
+
+  componentDidMount = () => {
+    const {deck} = this.props;
+    console.log('Actualizado!')
+
+    if (!isEmpty(deck)) {
+      this.props.navigation.setParams({title: deck.title})
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('prevProps', prevProps)
+
+
   }
 
   _handleAddCard = () => {
@@ -39,13 +56,15 @@ export class DeckDetails extends PureComponent {
   }
 
   render() {
-    const title = 'Deck 1'
-    const cards = [
-      {
-        question: 'Bla bla bla',
-        answer: 'blue blue blue',
-      }
-    ]
+    const {deck} = this.props;
+
+    if (!deck) {
+      return (
+        <Text>Not found</Text>
+      )
+    }
+
+    const {title, cards} = deck;
     const buttonStyle = {
       fontSize: 30,
       padding: 30,
@@ -66,7 +85,9 @@ export class DeckDetails extends PureComponent {
     return (
       <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
         <Text style={{fontSize: 30}}>{title}</Text>
-        <Text>{cards.length} cards</Text>
+        <Text>
+          {cards.length} cards
+        </Text>
 
         <TouchableOpacity
           style={buttonStyle}

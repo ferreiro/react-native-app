@@ -10,7 +10,7 @@ import {MaterialIcons} from '@expo/vector-icons'
 
 import ConnectedDashboard from './redux/containers/ConnectedDashboard';
 import ConnectedCreateDeck from './redux/containers/ConnectedCreateDeck';
-import {DeckDetails} from './components/DeckDetails';
+import ConnectedDeckDetails from './redux/containers/ConnectedDeckDetails';
 import {CreateDeck} from './components/CreateDeck';
 
 const DashboardStack = createStackNavigator({
@@ -19,7 +19,7 @@ const DashboardStack = createStackNavigator({
   },
   // TODO: Split this up into it's own stack... 
   DeckDetails: {
-    screen: DeckDetails
+    screen: ConnectedDeckDetails
   },
   CreateCard: {
     screen: ConnectedCreateDeck

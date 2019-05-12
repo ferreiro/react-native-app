@@ -3,21 +3,21 @@ import {ADD_DECK} from "../actions/decks";
 import timestamp from 'time-stamp'
 
 // const initialState = []
-const initialState = [
-    {
+const initialState = {
+    'mySuperDeck': {
         id: 'mySuperDeck',
         title: 'My super title',
-        items: [
+        cards: [
             {
                 question: '1: What is your name?',
                 answer: 'This is the answer',
             }
         ],
     },
-    {
+    'mySuperDeck2': {
         id: 'mySuperDeck2',
         title: 'My super title',
-        items: [
+        cards: [
             {
                 id: '232323',
                 question: '1: What is your name?',
@@ -30,7 +30,7 @@ const initialState = [
             }
         ],
     },
-]
+}
 
 export const decks = (state = initialState, action) => {
     const {type, payload} = action;
@@ -46,7 +46,10 @@ export const decks = (state = initialState, action) => {
 
         console.log('ADD_DECK', ADD_DECK)
 
-        return [newDeck, ...state]
+        return {
+            ...state,
+            ...{[newDeck.id]: newDeck}
+        }
     }
     
     return state
