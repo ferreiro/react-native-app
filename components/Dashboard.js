@@ -56,8 +56,6 @@ export class Dashboard extends PureComponent {
     openDeck = (deck, event) => {
         const {id, title} = deck;
 
-        console.log('event', event)
-        console.log(this.props)
         this.props.navigation.navigate('DeckDetails', {
             id,
             title
@@ -119,6 +117,7 @@ export class Dashboard extends PureComponent {
                     <FlatList
                         data={decksData}
                         renderItem={this.renderCardItem}
+                        keyExtractor={(item, index) => index.toString()}
                     />
                 )}
             </View>

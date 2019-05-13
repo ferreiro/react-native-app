@@ -17,8 +17,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 30,
   },
-  title: {
+  remaining: {
     paddingBottom: 20,
+    fontSize: 20,
+  },
+  title: {
+    paddingBottom: 10,
     fontSize: 30,
   },
   subtitle: {
@@ -42,7 +46,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   correct: {
-    backgroundColor: 'green'
+    backgroundColor: 'green',
+    marginTop: 20,
   },
   incorrect: {
     backgroundColor: 'red'
@@ -131,7 +136,7 @@ export class Quiz extends PureComponent {
 
   renderCard = ({answer, question}, currentCard, total, showAnswer) => (
     <View style={styles.container}>
-      <Text style={styles.title}>
+      <Text style={styles.remaining}>
         Remaining: {total - currentCard} / {total}
       </Text>
 

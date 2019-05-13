@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   submit: {
     maxWidth: 250,
     backgroundColor: '#000',
-    padding: 20
+    padding: 20,
+    borderRadius: 10
   }
 })
 
