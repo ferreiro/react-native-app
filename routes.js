@@ -4,7 +4,7 @@ import {
     createStackNavigator,
     createBottomTabNavigator
 } from 'react-navigation';
-import {StyleSheet, Platform} from 'react-native';
+import {Platform} from 'react-native';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import {MaterialIcons, Ionicons} from '@expo/vector-icons'
 
@@ -18,7 +18,6 @@ const DashboardStack = createStackNavigator({
   Home: {
     screen: ConnectedDashboard
   },
-  // TODO: Split this up into it's own stack... 
   DeckDetails: {
     screen: ConnectedDeckDetails
   },

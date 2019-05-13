@@ -2,15 +2,14 @@ import {merge, pickBy, isEmpty} from 'lodash'
 import {ADD_DECK, REMOVE_DECK, ADD_CARD} from "../actions/decks";
 import timestamp from 'time-stamp'
 
-// const initialState = []
 const initialState = {
     'mySuperDeck': {
         id: 'mySuperDeck',
         title: 'My super title',
         cards: [
             {
-                question: '1: What is your name?',
-                answer: 'This is the answer',
+                question: 'What is the name of the creator of this app?',
+                answer: 'Jorge Ferreiro',
             }
         ],
     },
@@ -20,13 +19,13 @@ const initialState = {
         cards: [
             {
                 id: '232323',
-                question: '1: What is your name?',
-                answer: 'This is the answer',
+                question: 'How old are you?',
+                answer: '120 years old',
             },
             {
                 id: '232323244',
-                question: '1: What is your name?',
-                answer: 'This is the answer',
+                question: 'What do you like most in live?',
+                answer: 'Create React Native apps :)',
             }
         ],
     },
