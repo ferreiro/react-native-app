@@ -6,23 +6,17 @@ import {Notifications, Permissions} from 'expo'
 
 const NOTIFICATION_KEY = 'Udacity:notifications'
 
-export function getDailyReminderValue () {
-  return {
-    today: "👋 Don't forget to log your data today!"
-  }
-}
-
-export function clearLocalNotification () {
-  return AsyncStorage.removeItem(NOTIFICATION_KEY)
+export const clearLocalNotification = () => (
+  AsyncStorage.removeItem(NOTIFICATION_KEY)
     .then(Notifications.cancelAllScheduledNotificationsAsync)
-}
+)
 
-function createNotification () {
+const createNotification = () => {
   return {
     title: 'Do your exercise!',
     body: "Don't forget to do your exercises today!",
     ios: {
-      sound: true,
+
     },
     android: {
       sound: true,
@@ -33,7 +27,16 @@ function createNotification () {
   }
 }
 
-export function setLocalNotification () {
+export const setLocalNotification = () => {
+  const today = new Date();
+  let tomorrow = new Date();
+  tomorrow.setDate(today.getDate() +1);
+
+  const notificationOptions = {
+    time: tomorrow,
+    repeat: 'day',
+  }
+
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
     .then((data) => {
@@ -43,17 +46,9 @@ export function setLocalNotification () {
             if (status === 'granted') {
               Notifications.cancelAllScheduledNotificationsAsync()
 
-              let tomorrow = new Date()
-              tomorrow.setDate(tomorrow.getDate() + 1)
-              tomorrow.setHours(20)
-              tomorrow.setMintutes(0)
-
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
-                {
-                  time: tomorrow,
-                  repeat: 'day',
-                }
+                notificationOptions
               )
 
               AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
