@@ -2,13 +2,10 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types'
 import {isEmpty} from 'lodash'
 import {
-  Button,
   StyleSheet,
   Text,
   View,
-  KeyboardAvoidingView,
   TouchableOpacity,
-  TextInput,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -26,6 +23,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 20,
     paddingBottom: 30,
+    textAlign: 'center',
   },
   button: {
     fontSize: 30,
@@ -42,6 +40,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
   }
 })
+
+export const DeckViewDetails = ({ title, cards }) => (
+  <View>
+    <Text style={styles.title}>
+      {title}
+    </Text>
+    <Text style={styles.subtitle}>
+      {cards.length === 1
+        ? `${cards.length} Card`
+        : `${cards.length} Cards`
+      }
+    </Text>
+  </View>
+);
 
 export class DeckDetails extends PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -97,13 +109,10 @@ export class DeckDetails extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>
-          {title}
-        </Text>
-
-        <Text style={styles.subtitle}>
-          {cards.length} cards
-        </Text>
+        <DeckViewDetails 
+          title={title}
+          cards={cards}
+        />
 
         <TouchableOpacity
           style={styles.button}

@@ -9,3 +9,7 @@ Welcome to the most amazing project in React! A flashcard game in React native, 
 3. Start the server `yarn start.`
 
 You may need to download ![https://expo.io/](https://expo.io/) in your phone if you want to develop with your phone. Otherwise, you should install some android or iOS emulator.
+
+## Testing
+
+This app has been tested in android (Pixel 2 with latest OS) as well as iOS (with the emulator in Pixel X)

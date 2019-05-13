@@ -16,7 +16,7 @@ const createNotification = () => {
     title: 'Do your exercise!',
     body: "Don't forget to do your exercises today!",
     ios: {
-
+      sound: true,
     },
     android: {
       sound: true,
@@ -27,13 +27,9 @@ const createNotification = () => {
   }
 }
 
-export const setLocalNotification = () => {
-  const today = new Date();
-  let tomorrow = new Date();
-  tomorrow.setDate(today.getDate() +1);
-
+export const setLocalNotification = (time) => {
   const notificationOptions = {
-    time: tomorrow,
+    time,
     repeat: 'day',
   }
 
@@ -42,10 +38,9 @@ export const setLocalNotification = () => {
     .then((data) => {
       if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS)
-          .then(({ status }) => {
+          .then(({status}) => {
             if (status === 'granted') {
               Notifications.cancelAllScheduledNotificationsAsync()
-
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
                 notificationOptions

@@ -8,6 +8,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -77,14 +78,16 @@ export class Quiz extends PureComponent {
   correctAnswer = () => {
     this.setState((prevState) => ({
       correct: prevState.correct + 1,
-      currentCard: prevState.currentCard + 1
+      currentCard: prevState.currentCard + 1,
+      showAnswer: false
     }))
   }
 
   incorrectAnswer = () => {
     this.setState((prevState) => ({
       incorrect: prevState.incorrect + 1,
-      currentCard: prevState.currentCard + 1
+      currentCard: prevState.currentCard + 1,
+      showAnswer: false
     }))
   }
 
@@ -104,6 +107,15 @@ export class Quiz extends PureComponent {
     this.setState({showAnswer: false})
   ) 
 
+  scheduleLocalNotification = () => {
+    let tomorrow = new Date()
+    tomorrow.setHours(12)
+    tomorrow.setMinutes(0)
+
+    clearLocalNotification()
+      .then(setLocalNotification(tomorrow))
+  }
+
   renderScore = () => {
     const {
       correct,
@@ -113,6 +125,8 @@ export class Quiz extends PureComponent {
       deck
     } = this.props;
     const cardsLength = deck.cards.length;
+
+    this.scheduleLocalNotification()
 
     return (
       <View style={styles.container}>
@@ -181,7 +195,7 @@ export class Quiz extends PureComponent {
     const {deck} = this.props;
     const {currentCard, showAnswer} = this.state;
 
-    if (!deck || isEmpty(deck)) {
+    if (!deck || isEmpty(deck) || deck.cards.length === 0) {
       return (
         <Text>Quiz Not found</Text>
       )

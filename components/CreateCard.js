@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
+import {isEmpty} from 'lodash'
 import {
   StyleSheet,
   Text,
-  View,
   KeyboardAvoidingView,
   TouchableOpacity,
   TextInput,
@@ -58,6 +58,10 @@ export class CreateCard extends PureComponent {
     _handleSubmitForm = () => {
       const {question, answer} = this.state;
       const {navigation} = this.props;
+
+      if(isEmpty(question) || isEmpty(answer)) { 
+        return alert("Fill both field")
+      }
 
       const deckId = navigation.getParam('deckId')
       
