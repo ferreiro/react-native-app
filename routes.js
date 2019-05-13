@@ -52,19 +52,27 @@ const CreateDeckStack = createStackNavigator({
   },
 })
 
-const AppNavigator = Platform.OS === 'ios' ? (
-  createBottomTabNavigator({
-    Home: {
-      screen: DashboardStack,
-      tabBarIcon: <MaterialIcons name="dashboard" size={10} color={'#000'} />
+const mainAppNavigation = {
+  Home: {
+    screen: DashboardStack,
+    navigationOptions: {
+      tabBarLabel: 'Dashboard',
+      tabBarIcon: <MaterialIcons name="dashboard" size={30} color={'#000'} />
     },
-    CreateDeck: CreateDeckStack
-  })
+  },
+  CreateDeck: {
+    screen: CreateDeckStack,
+    navigationOptions: {
+      tabBarLabel: 'Create Deck',
+      tabBarIcon: <MaterialIcons name="dashboard" size={30} color={'#000'} />
+    }
+  }
+}
+
+const AppNavigator = Platform.OS === 'ios' ? (
+  createBottomTabNavigator(mainAppNavigation)
 ) : (
-  createMaterialBottomTabNavigator({
-    Home: { screen: DashboardStack },
-    CreateDeck: { screen: CreateDeckStack }
-  })
+  createMaterialBottomTabNavigator(mainAppNavigation)
 )
 
 export const AppContainer = createAppContainer(AppNavigator)
