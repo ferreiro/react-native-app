@@ -6,7 +6,7 @@ import {
 } from 'react-navigation';
 import {StyleSheet, Platform} from 'react-native';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
-import {MaterialIcons} from '@expo/vector-icons'
+import {MaterialIcons, Ionicons} from '@expo/vector-icons'
 
 import ConnectedDashboard from './redux/containers/ConnectedDashboard';
 import ConnectedCreateDeck from './redux/containers/ConnectedCreateDeck';
@@ -57,22 +57,34 @@ const mainAppNavigation = {
     screen: DashboardStack,
     navigationOptions: {
       tabBarLabel: 'Dashboard',
-      tabBarIcon: <MaterialIcons name="dashboard" size={30} color={'#000'} />
+      tabBarIcon: ({tintColor}) => (
+        Platform.OS === 'ios' ? (
+          <Ionicons name="md-home" size={28} color={tintColor} />
+        ) : (
+          <MaterialIcons name="dashboard" size={28} color={tintColor} />
+        )
+      )
     },
   },
   CreateDeck: {
     screen: CreateDeckStack,
     navigationOptions: {
       tabBarLabel: 'Create Deck',
-      tabBarIcon: <MaterialIcons name="dashboard" size={30} color={'#000'} />
+      tabBarIcon: ({tintColor, inactiveTintColor}) => (
+        Platform.OS === 'ios' ? (
+          <Ionicons name="ios-add-circle-outline" size={28} color={tintColor} />
+        ) : (
+          <MaterialIcons name="add" size={28} color={tintColor} />
+        )
+      )
     }
   }
 }
 
 const AppNavigator = Platform.OS === 'ios' ? (
-  createBottomTabNavigator(mainAppNavigation)
+  createBottomTabNavigator(mainAppNavigation, {tabBarOptions: {activeTintColor: '#dc1c5f'}})
 ) : (
-  createMaterialBottomTabNavigator(mainAppNavigation)
+  createMaterialBottomTabNavigator(mainAppNavigation, {tabBarOptions: {activeTintColor: '#dc1c5f'}})
 )
 
 export const AppContainer = createAppContainer(AppNavigator)
