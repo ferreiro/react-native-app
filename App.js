@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 
 import {AppContainer} from './routes'
 import rootReducer from './redux/reducers/index'
+import {setLocalNotification} from './utils/helpers'
 
 const store = createStore(
   rootReducer,
@@ -22,8 +23,11 @@ const styles = StyleSheet.create({
 })
 
 export default class App extends PureComponent {
-  render() {
+  componentDidMount() {
+    setLocalNotification()
+  }
 
+  render() {
     return (
       <Provider store={store}>
         <AppContainer style={styles.container} />
