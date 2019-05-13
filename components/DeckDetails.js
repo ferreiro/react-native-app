@@ -59,7 +59,6 @@ export class DeckDetails extends PureComponent {
 
   componentDidMount = () => {
     const {deck} = this.props;
-    console.log('Actualizado!')
 
     if (!isEmpty(deck)) {
       this.props.navigation.setParams({title: deck.title})
@@ -73,8 +72,9 @@ export class DeckDetails extends PureComponent {
   }
 
   startQuiz = () => {
-    // TODO: Implement
-    alert('Start quiz...')
+    this.props.navigation.navigate('Quiz', {
+      deck: this.props.deck,
+    })
   }
 
   deleteDeck = () => {

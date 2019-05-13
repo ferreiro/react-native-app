@@ -21,6 +21,19 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     fontSize: 30,
   },
+  input: {
+    padding: 30,
+    alignSelf: 'stretch',
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 30,
+    borderRadius: 10,
+  },
+  submit: {
+    maxWidth: 250,
+    backgroundColor: '#000',
+    padding: 20
+  }
 })
 
 export class CreateCard extends PureComponent {
@@ -71,14 +84,14 @@ export class CreateCard extends PureComponent {
           </Text>
 
           <TextInput
-            style={{padding: 30, alignSelf: 'stretch', borderColor: 'gray', borderWidth: 1, marginBottom: 30}}
+            style={styles.input}
             value={question}
             placeholder="Question"
             onChangeText={this._handleChangeQuestion}
           />
   
           <TextInput
-            style={{padding: 30, alignSelf: 'stretch', borderColor: 'gray', borderWidth: 1, marginBottom: 30}}
+            style={styles.input}
             value={answer}
             placeholder="Answer"
             onChangeText={this._handleChangeAnswer}
@@ -86,7 +99,7 @@ export class CreateCard extends PureComponent {
   
           <TouchableOpacity
             onPress={this._handleSubmitForm}
-            style={{maxWidth: 250, backgroundColor: '#000', padding: 20}}
+            style={styles.submit}
           >
             <Text style={{color: '#fff', fontSize: 20}}>
               Submit card

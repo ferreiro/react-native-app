@@ -12,6 +12,7 @@ import ConnectedDashboard from './redux/containers/ConnectedDashboard';
 import ConnectedCreateDeck from './redux/containers/ConnectedCreateDeck';
 import ConnectedDeckDetails from './redux/containers/ConnectedDeckDetails';
 import ConnectedCreateCard from './redux/containers/ConnectedCreateCard';
+import ConnectedQuiz from './redux/containers/ConnectedQuiz';
 
 const DashboardStack = createStackNavigator({
   Home: {
@@ -23,6 +24,9 @@ const DashboardStack = createStackNavigator({
   },
   CreateCard: {
     screen: ConnectedCreateCard
+  },
+  Quiz: {
+    screen: ConnectedQuiz,
   }
 }, {
   initialRouteName: "Home",

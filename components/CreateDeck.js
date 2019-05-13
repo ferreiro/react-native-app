@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import timestamp from 'time-stamp'
 import {
   Button,
   StyleSheet,
@@ -56,22 +57,24 @@ export class CreateDeck extends PureComponent {
   
     _handleSubmitForm = () => {
       const {title} = this.state
+      const id = timestamp.utc('YYYYMMDDmmssms')
+
       const {addDeck, navigation} = this.props
 
       // Persist the new deck
-      addDeck({title})
-      this.setState(initialState)
+      addDeck({title, id})
 
       // Change the screen to home.
       navigation.dismiss()
-      navigation.navigate('Home')
+      navigation.navigate('DeckDetails', {
+        id
+      })
+      this.setState(initialState)
     }
   
     render() {
       const {title} = this.state;
       const {navigation} = this.props;
-      const id = navigation.getParam('id', 'default');
-      const name = navigation.getParam('name', 'default');
   
       return (
         <KeyboardAvoidingView

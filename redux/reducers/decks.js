@@ -38,7 +38,7 @@ export const decks = (state = initialState, action) => {
     if (type === ADD_DECK) {
         const newDeck = {
             title: payload.title,
-            id: timestamp.utc('YYYYMMDDmmssms'),
+            id: payload.id,
             cards: [],
         }
 
