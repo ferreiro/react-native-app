@@ -9,6 +9,20 @@ import {
 } from 'react-native';
 
 
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    padding: 30,
+  },
+  title: {
+    paddingBottom: 20,
+    fontSize: 30,
+  },
+})
+
 export class CreateCard extends PureComponent {
     state = {
       answer: '',
@@ -28,9 +42,18 @@ export class CreateCard extends PureComponent {
     }
   
     _handleSubmitForm = () => {
-      // TODO: Implement method to add card into a deck
-      console.log('pressed!')
-      window.alert('Sending card!!!')
+      const {question, answer} = this.state;
+      const {navigation} = this.props;
+
+      const deckId = navigation.getParam('deckId')
+      
+      this.props.addCard({
+        deckId,
+        question,
+        answer,
+      })
+
+      navigation.goBack()
     }
   
     render() {
@@ -38,9 +61,15 @@ export class CreateCard extends PureComponent {
   
       return (
         <KeyboardAvoidingView
-          style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}
+          style={styles.container}
           behavior="padding"
         >
+          <Text
+            style={styles.title}
+          >
+            Add a new card
+          </Text>
+
           <TextInput
             style={{padding: 30, alignSelf: 'stretch', borderColor: 'gray', borderWidth: 1, marginBottom: 30}}
             value={question}
@@ -59,7 +88,7 @@ export class CreateCard extends PureComponent {
             onPress={this._handleSubmitForm}
             style={{maxWidth: 250, backgroundColor: '#000', padding: 20}}
           >
-            <Text style={{color: '#fff', fontSize: '20px'}}>
+            <Text style={{color: '#fff', fontSize: 20}}>
               Submit card
             </Text>
           </TouchableOpacity>

@@ -90,12 +90,8 @@ export class Dashboard extends PureComponent {
   
     render() {
         const {decks} = this.props
-
-        console.log('decks')
-        console.log(decks)
         const decksData = Object.values(decks)
-        console.log(decksData)
-        
+
         return (
             <View
                 style={{

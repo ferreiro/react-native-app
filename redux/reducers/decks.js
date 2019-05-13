@@ -1,5 +1,5 @@
-import {merge} from 'lodash'
-import {ADD_DECK} from "../actions/decks";
+import {merge, pickBy, isEmpty} from 'lodash'
+import {ADD_DECK, REMOVE_DECK, ADD_CARD} from "../actions/decks";
 import timestamp from 'time-stamp'
 
 // const initialState = []
@@ -35,8 +35,6 @@ const initialState = {
 export const decks = (state = initialState, action) => {
     const {type, payload} = action;
 
-    console.log('decks reducer')
-
     if (type === ADD_DECK) {
         const newDeck = {
             title: payload.title,
@@ -44,13 +42,32 @@ export const decks = (state = initialState, action) => {
             cards: [],
         }
 
-        const updatedState =  merge({}, state, {[newDeck.id]: newDeck})
+        return merge({}, state, {[newDeck.id]: newDeck})
+    } else if (type === ADD_CARD) {
+        const {deckId, answer, question} = payload
 
-        console.log('ADD_DECK', ADD_DECK)
-        console.log('updatedState')
-        console.log(updatedState)
+        // NB: Skip if Deck id does not exist
+        if (isEmpty(state[deckId])) {
+            return state;
+        }
 
-        return updatedState
+        const updatedDeck = state[deckId];
+        updatedDeck.cards.push({
+            id: timestamp.utc('YYYYMMDDmmssms'),
+            question,
+            answer,
+        })
+
+        return merge({}, state, {
+            [deckId]: updatedDeck
+        })
+    } else if (type === REMOVE_DECK) {
+        const {id} = payload
+        const removeDeckById = (item) => {
+            return item.id !== id
+        }
+
+        return pickBy(state, removeDeckById);
     }
     
     return state

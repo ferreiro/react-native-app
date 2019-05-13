@@ -1,12 +1,12 @@
 import {connect} from 'react-redux'
 
 import {CreateCard} from '../../components/CreateCard'
-import {addDeck} from '../actions/decks'
+import {addCard} from '../actions/decks'
 
 const mapStateToProps = undefined
 
 const mapDispatchToProps = {
-    addDeck
+    addCard
 }
 
 export default connect(

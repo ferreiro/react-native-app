@@ -1,10 +1,12 @@
 import {connect} from 'react-redux'
 
 import {DeckDetails} from '../../components/DeckDetails'
+import {removeDeck} from '../actions/decks'
 
 const DEFAULT_DECK_DETAILS_TITLE = 'Deck details'
 
-const mapStateToProps = (state, {navigation}) => {
+const mapStateToProps = (state, ownProps) => {
+    const {navigation} = ownProps;
     // NB: Alternative syntax: const {id} = navigation.state.params;
     const id = navigation.getParam('id', DEFAULT_DECK_DETAILS_TITLE)
 
@@ -12,24 +14,11 @@ const mapStateToProps = (state, {navigation}) => {
         id,
         deck: state.decks[id]
     };
-  }
+}
 
-  
-// const mapStateToProps = (state, ownProps) => {
-//     // console.log('ownProps')
-//     // console.log(ownProps)
-
-//     // const {navigation} = ownProps;
-//     // console.log('navigation')
-//     // console.log(navigation)
-//     // const id = '23'
-//     // const { id } = navigation.state.params;
-
-//     return {
-//         deck: {},
-//     }
-// }
-const mapDispatchToProps = undefined
+const mapDispatchToProps = {
+    removeDeck,
+}
 
 export default connect(
     mapStateToProps,

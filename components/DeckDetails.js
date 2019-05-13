@@ -11,6 +11,38 @@ import {
   TextInput,
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    padding: 30,
+  },
+  title: {
+    paddingBottom: 20,
+    fontSize: 30,
+  },
+  subtitle: {
+    fontSize: 20,
+    paddingBottom: 30,
+  },
+  button: {
+    fontSize: 30,
+    padding: 30,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    backgroundColor: '#f0f0f0',
+    marginBottom: 20,
+  },
+  buttonDelete: {
+    color: 'red',
+    padding: 30,
+    fontSize: 20,
+  }
+})
+
 export class DeckDetails extends PureComponent {
   static navigationOptions = ({ navigation }) => {
     const title = navigation.getParam('title');
@@ -22,6 +54,7 @@ export class DeckDetails extends PureComponent {
 
   static propTypes ={
     deck: PropTypes.object,
+    removeDeck: PropTypes.func,
   }
 
   componentDidMount = () => {
@@ -33,26 +66,22 @@ export class DeckDetails extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    console.log('prevProps', prevProps)
-
-
-  }
-
-  _handleAddCard = () => {
+  addCard = () => {
     this.props.navigation.navigate('CreateCard', {
       deckId: this.props.deck.id
     })
   }
 
-  _handleStartQuiz = () => {
+  startQuiz = () => {
     // TODO: Implement
     alert('Start quiz...')
   }
 
-  _handleDeleteDeck = () => {
-    // TODO: Implement
-    alert('Delete deck...')
+  deleteDeck = () => {
+    const id = this.props.deck.id;
+
+    this.props.removeDeck({id})
+    this.props.navigation.navigate('Home')
   }
 
   render() {
@@ -65,49 +94,37 @@ export class DeckDetails extends PureComponent {
     }
 
     const {title, cards} = deck;
-    const buttonStyle = {
-      fontSize: 30,
-      padding: 30,
-      borderRadius: 20,
-      border: '1px solid #000',
-      backgroundColor: '#f0f0f0',
-      marginBottom: 20,
-    }
-
-    const buttonDeleteStyle = {
-      ...buttonStyle,
-      ...{
-        color: 'red',
-        backgroundColor: '#fff'
-      }
-    }
 
     return (
-      <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-        <Text style={{fontSize: 30}}>{title}</Text>
-        <Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          {title}
+        </Text>
+
+        <Text style={styles.subtitle}>
           {cards.length} cards
         </Text>
 
         <TouchableOpacity
-          style={buttonStyle}
-          onPress={this._handleAddCard}
+          style={styles.button}
+          onPress={this.addCard}
         >
           <Text>Add Card</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={buttonStyle}
-          onPress={this._handleStartQuiz}
+          style={styles.button}
+          onPress={this.startQuiz}
         >
           <Text>Start Quiz</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={buttonDeleteStyle}
-          onPress={this._handleDeleteDeck}
+          onPress={this.deleteDeck}
         >
-          <Text style={{color: 'red'}}>
+          <Text
+            style={styles.buttonDelete}
+          >
             Delete Deck
           </Text>
         </TouchableOpacity>
