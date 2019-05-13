@@ -2,6 +2,8 @@ import React from 'react'
 import {AsyncStorage } from 'react-native'
 import {Notifications, Permissions} from 'expo'
 
+// Code from Udacity local notification
+
 const NOTIFICATION_KEY = 'Udacity:notifications'
 
 export function getDailyReminderValue () {
