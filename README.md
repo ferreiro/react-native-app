@@ -1,5 +1,7 @@
 # React Native Flashcards
 
+DEMO: [https://studio.youtube.com/video/gMmj9OOkqpw/edit](https://studio.youtube.com/video/gMmj9OOkqpw/edit)
+
 Welcome to the most amazing project in React! A flashcard game in React native, available for iOS as well as Android!
 
 ## How to install.
